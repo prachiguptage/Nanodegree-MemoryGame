@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 
-
+let openCard =[];
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -43,6 +43,18 @@ for(let card of cardList){
 	card.addEventListener('click',function(){
 		card.classList.toggle('open');
 		card.classList.toggle('show');
+		openCard.push(card);
+		if(openCard.length>2){
+			closeOpenCard();
+			openCard.splice(0,2);
+		}
 	});
 }
 
+//close open card
+function closeOpenCard(){
+	for(let i=0;i<2;i++){
+		openCard[i].classList.remove('open');
+		openCard[i].classList.remove('show');
+	}
+}
