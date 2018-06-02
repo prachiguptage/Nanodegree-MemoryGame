@@ -15,16 +15,13 @@
 let openCard =[];
 const scoreClass = document.querySelector('.moves');
 const ratingClass = document.querySelectorAll('.fa-star');
-<<<<<<< HEAD
 const refreshClass = document.querySelector(".restart");
 const deckClass = document.querySelector(".deck");
-=======
 const modal = document.querySelector('.modal');
 const closeSpan = document.querySelector('.close');
 const tMoves = document.querySelector('.tMoves');
 const tStar = document.querySelector('.tStar');
 let star;
->>>>>>> matching
 let score;
 let match;
 /*
