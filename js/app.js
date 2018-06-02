@@ -3,7 +3,8 @@
  */
 
 let openCard =[];
-const scoreClass = document.querySelector(".moves");
+const scoreClass = document.querySelector('.moves');
+const ratingClass = document.querySelectorAll('.fa-star');
 let score;
 /*
  * Display the cards on the page
@@ -15,6 +16,7 @@ let score;
  function init(){
  	score =0;
  	scoreClass.innerText = score;
+ 	ratingUpdate();
  }
 
  init();
@@ -97,4 +99,26 @@ function changeMatchClass(){
 function scoreChange(){
 	score=score+1;
 	scoreClass.innerText = score;
+	ratingUpdate();
+}
+
+//rating update 
+function ratingUpdate(){
+	if(score <20){
+		ratingClass[0].classList.remove("fa-star-o");
+		ratingClass[0].classList.add("fa-star");
+		ratingClass[1].classList.remove("fa-star-o");
+		ratingClass[1].classList.add("fa-star");
+		ratingClass[2].classList.remove("fa-star-o");
+		ratingClass[2].classList.add("fa-star");
+	}else if(score <35){
+		ratingClass[2].classList.remove("fa-star");
+		ratingClass[2].classList.add("fa-star-o");
+	}else if(score<50){
+		ratingClass[1].classList.remove("fa-star");
+		ratingClass[1].classList.add("fa-star-o");
+	}else{
+		ratingClass[0].classList.remove("fa-star");
+		ratingClass[0].classList.add("fa-star-o");
+	}
 }
