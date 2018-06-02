@@ -3,12 +3,21 @@
  */
 
 let openCard =[];
+const scoreClass = document.querySelector(".moves");
+let score;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+
+ function init(){
+ 	score =0;
+ 	scoreClass.innerText = score;
+ }
+
+ init();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -42,6 +51,7 @@ const cardList = document.querySelectorAll('.card');
 for(let card of cardList){
 	card.addEventListener('click',function cardClicked(){
 		if(!card.classList.contains('match') && !card.classList.contains('open') && !card.classList.contains('show') ){
+			scoreChange();
 			card.classList.add('open','show');
 			openCard.push(card);
 			if(openCard.length>2){
@@ -81,4 +91,10 @@ function changeMatchClass(){
 		openCard[i].classList.add('match');
 	}
 
+}
+
+//score change
+function scoreChange(){
+	score=score+1;
+	scoreClass.innerText = score;
 }
