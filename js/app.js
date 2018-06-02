@@ -5,6 +5,7 @@
 let openCard =[];
 const scoreClass = document.querySelector('.moves');
 const ratingClass = document.querySelectorAll('.fa-star');
+const refreshClass = document.querySelector(".restart");
 let score;
 /*
  * Display the cards on the page
@@ -122,3 +123,6 @@ function ratingUpdate(){
 		ratingClass[0].classList.add("fa-star-o");
 	}
 }
+
+//refresh button clicked 
+refreshClass.addEventListener('click',init);
