@@ -67,6 +67,8 @@ function matchingCard(){
 	if(openCard[0].innerHTML===openCard[1].innerHTML){
 		changeMatchClass();
 		closeOpenCard();
+	}else{
+		window.setTimeout(closeOpenCard,1000);
 	}
 }
 
