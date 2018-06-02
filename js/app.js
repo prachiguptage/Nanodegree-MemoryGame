@@ -2,10 +2,21 @@
  * Create a list that holds all of your cards
  */
 
+ const cards = [ 'fa-diamond', 'fa-diamond',
+ 				 'fa-paper-plane-o','fa-paper-plane-o',
+ 				 'fa-anchor','fa-anchor',
+ 				 'fa-bolt','fa-bolt',
+ 				 'fa-cube','fa-cube',
+ 				 'fa-leaf','fa-leaf',
+ 				 'fa-bicycle','fa-bicycle',
+ 				 'fa-bomb','fa-bomb'
+ 			  	];
+
 let openCard =[];
 const scoreClass = document.querySelector('.moves');
 const ratingClass = document.querySelectorAll('.fa-star');
 const refreshClass = document.querySelector(".restart");
+const deckClass = document.querySelector(".deck");
 let score;
 /*
  * Display the cards on the page
@@ -13,11 +24,19 @@ let score;
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+ function generateCard(card){
+ 	
+ 	return '<li class="card"><i class="fa '+ card+'"></i></li>';
+
+
+ }
 
  function init(){
  	score =0;
  	scoreClass.innerText = score;
  	ratingUpdate();
+ 	genrateRandomCard();
+ 	enableClicking();
  }
 
  init();
@@ -49,21 +68,23 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 //enable clicking of card 
-const cardList = document.querySelectorAll('.card');
+function enableClicking(){
+	const cardList = document.querySelectorAll('.card');
 
-for(let card of cardList){
-	card.addEventListener('click',function cardClicked(){
-		if(!card.classList.contains('match') && !card.classList.contains('open') && !card.classList.contains('show') ){
-			scoreChange();
-			card.classList.add('open','show');
-			openCard.push(card);
-			if(openCard.length>2){
-				closeOpenCard();
-			}else if (openCard.length ==2){
-				matchingCard();
+	for(let card of cardList){
+		card.addEventListener('click',function cardClicked(){
+			if(!card.classList.contains('match') && !card.classList.contains('open') && !card.classList.contains('show') ){
+				scoreChange();
+				card.classList.add('open','show');
+				openCard.push(card);
+				if(openCard.length>2){
+					closeOpenCard();
+				}else if (openCard.length ==2){
+					matchingCard();
+				}
 			}
-		}
-	});
+		});
+	}
 }
 
 //close open card
@@ -125,4 +146,18 @@ function ratingUpdate(){
 }
 
 //refresh button clicked 
-refreshClass.addEventListener('click',init);
+refreshClass.addEventListener('click',function(){
+	deckClass.innerHTML='';
+	init();
+});
+
+function genrateRandomCard(){
+	let cardList='';
+	let shuffledCards = shuffle(cards);
+	for(let card of shuffledCards){
+		let generated =generateCard(card);
+		cardList=cardList+generated;
+	}
+
+	deckClass.innerHTML=cardList;
+}
