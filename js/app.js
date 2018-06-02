@@ -21,9 +21,15 @@ const modal = document.querySelector('.modal');
 const closeSpan = document.querySelector('.close');
 const tMoves = document.querySelector('.tMoves');
 const tStar = document.querySelector('.tStar');
+const timerSpan = document.querySelector('.timer');
+const tTimer = document.querySelector('.tTimer');
 let star;
 let score;
 let match;
+let second=0;
+let minutes=0;
+let hours=0;
+let interval;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -131,6 +137,9 @@ function changeMatchClass(){
 
 //score change
 function scoreChange(){
+	if(score === 0){
+		startTimer();
+	}
 	score=score+1;
 	scoreClass.innerText = score;
 	ratingUpdate();
@@ -163,6 +172,10 @@ function ratingUpdate(){
 //refresh button clicked 
 refreshClass.addEventListener('click',function(){
 	deckClass.innerHTML='';
+	clearInterval(interval);
+	second=0;
+	minutes=0;
+	timerSpan.innerHTML='00:00';
 	init();
 });
 
@@ -180,6 +193,7 @@ function genrateRandomCard(){
 //check matching complete
 function isMatchingComplete(){
 	if(match===8){
+		clearInterval(interval);
 		return true;
 	}
 	return false;
@@ -189,7 +203,11 @@ function isMatchingComplete(){
 function displayFinalScore(){
 	modal.style.display ="block";
 	tMoves.innerHTML =score;
-	tStar.innerHTML=star;;
+	tStar.innerHTML=star;
+	if(hours>0)
+		tTimer.innerHTML= hours +':'+minutes+':'+second;
+	else
+		tTimer.innerHTML= minutes+':'+second;
 }
 
 closeSpan.addEventListener('click', function(){
@@ -201,3 +219,31 @@ window.addEventListener('click', function(event){
 		modal.style.display="none";
 	}
 });
+
+//timer start
+function startTimer(){
+	clearInterval(interval);
+	interval=setInterval(setTimer,1000);
+
+}
+function setTimer(){
+	 let time =0;
+	 second = second+1;
+	 if(second<10){
+	 	if (minutes>0)
+	 		time=minutes+':0'+second;
+	 	else
+	 		time='0:0'+second;
+	 }else if(second<60){
+	 	if (minutes>0)
+	 		time=minutes+':'+second;
+	 	else
+	 		time='0:'+second;
+	 }else {
+	 	minutes++;
+	 	second=0;
+	 	time = minutes+':00';
+	 }
+
+	 timerSpan.innerHTML = time;
+}
