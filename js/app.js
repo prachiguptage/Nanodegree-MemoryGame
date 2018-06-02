@@ -40,13 +40,15 @@ function shuffle(array) {
 const cardList = document.querySelectorAll('.card');
 
 for(let card of cardList){
-	card.addEventListener('click',function(){
-		card.classList.toggle('open');
-		card.classList.toggle('show');
-		openCard.push(card);
-		if(openCard.length>2){
-			closeOpenCard();
-			openCard.splice(0,2);
+	card.addEventListener('click',function cardClicked(){
+		if(!card.classList.contains('match') && !card.classList.contains('open') && !card.classList.contains('show') ){
+			card.classList.add('open','show');
+			openCard.push(card);
+			if(openCard.length>2){
+				closeOpenCard();
+			}else if (openCard.length ==2){
+				matchingCard();
+			}
 		}
 	});
 }
@@ -54,7 +56,23 @@ for(let card of cardList){
 //close open card
 function closeOpenCard(){
 	for(let i=0;i<2;i++){
-		openCard[i].classList.remove('open');
-		openCard[i].classList.remove('show');
+		openCard[i].classList.remove('open', 'show');
 	}
+	openCard.splice(0,2);
+}
+
+//matching card
+function matchingCard(){
+
+	if(openCard[0].innerHTML===openCard[1].innerHTML){
+		changeMatchClass();
+		closeOpenCard();
+	}
+}
+
+function changeMatchClass(){
+	for(let i=0;i<2;i++){
+		openCard[i].classList.add('match');
+	}
+
 }
