@@ -15,9 +15,18 @@
 let openCard =[];
 const scoreClass = document.querySelector('.moves');
 const ratingClass = document.querySelectorAll('.fa-star');
+<<<<<<< HEAD
 const refreshClass = document.querySelector(".restart");
 const deckClass = document.querySelector(".deck");
+=======
+const modal = document.querySelector('.modal');
+const closeSpan = document.querySelector('.close');
+const tMoves = document.querySelector('.tMoves');
+const tStar = document.querySelector('.tStar');
+let star;
+>>>>>>> matching
 let score;
+let match;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -33,7 +42,9 @@ let score;
 
  function init(){
  	score =0;
+ 	match =0;
  	scoreClass.innerText = score;
+ 	star=3;
  	ratingUpdate();
  	genrateRandomCard();
  	enableClicking();
@@ -100,7 +111,11 @@ function matchingCard(){
 
 	if(openCard[0].innerHTML===openCard[1].innerHTML){
 		changeMatchClass();
+		match = match +1;
 		closeOpenCard();
+		if(isMatchingComplete()){
+			displayFinalScore();
+		}
 	}else{
 		window.setTimeout(function(){
 			if(openCard.length ==2){
@@ -126,20 +141,23 @@ function scoreChange(){
 
 //rating update 
 function ratingUpdate(){
-	if(score <20){
+	if(score <25){
 		ratingClass[0].classList.remove("fa-star-o");
 		ratingClass[0].classList.add("fa-star");
 		ratingClass[1].classList.remove("fa-star-o");
 		ratingClass[1].classList.add("fa-star");
 		ratingClass[2].classList.remove("fa-star-o");
 		ratingClass[2].classList.add("fa-star");
-	}else if(score <35){
+	}else if(score <45){
+		star =2;
 		ratingClass[2].classList.remove("fa-star");
 		ratingClass[2].classList.add("fa-star-o");
-	}else if(score<50){
+	}else if(score<60){
+		star =1;
 		ratingClass[1].classList.remove("fa-star");
 		ratingClass[1].classList.add("fa-star-o");
 	}else{
+		star =0;
 		ratingClass[0].classList.remove("fa-star");
 		ratingClass[0].classList.add("fa-star-o");
 	}
@@ -161,3 +179,28 @@ function genrateRandomCard(){
 
 	deckClass.innerHTML=cardList;
 }
+
+//check matching complete
+function isMatchingComplete(){
+	if(match===8){
+		return true;
+	}
+	return false;
+}
+
+//display matching box
+function displayFinalScore(){
+	modal.style.display ="block";
+	tMoves.innerHTML =score;
+	tStar.innerHTML=star;;
+}
+
+closeSpan.addEventListener('click', function(){
+	modal.style.display= "none";
+});
+
+window.addEventListener('click', function(event){
+	if(event.target == modal){
+		modal.style.display="none";
+	}
+});
