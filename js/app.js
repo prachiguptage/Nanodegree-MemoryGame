@@ -68,7 +68,11 @@ function matchingCard(){
 		changeMatchClass();
 		closeOpenCard();
 	}else{
-		window.setTimeout(closeOpenCard,1000);
+		window.setTimeout(function(){
+			if(openCard.length ==2){
+				closeOpenCard();
+			}
+		},1000);
 	}
 }
 
