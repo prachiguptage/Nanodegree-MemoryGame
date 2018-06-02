@@ -7,6 +7,9 @@ const scoreClass = document.querySelector('.moves');
 const ratingClass = document.querySelectorAll('.fa-star');
 const modal = document.querySelector('.modal');
 const closeSpan = document.querySelector('.close');
+const tMoves = document.querySelector('.tMoves');
+const tStar = document.querySelector('.tStar');
+let star;
 let score;
 let match;
 /*
@@ -20,6 +23,7 @@ let match;
  	score =0;
  	match =0;
  	scoreClass.innerText = score;
+ 	star=3;
  	ratingUpdate();
  }
 
@@ -120,12 +124,15 @@ function ratingUpdate(){
 		ratingClass[2].classList.remove("fa-star-o");
 		ratingClass[2].classList.add("fa-star");
 	}else if(score <45){
+		star =2;
 		ratingClass[2].classList.remove("fa-star");
 		ratingClass[2].classList.add("fa-star-o");
 	}else if(score<60){
+		star =1;
 		ratingClass[1].classList.remove("fa-star");
 		ratingClass[1].classList.add("fa-star-o");
 	}else{
+		star =0;
 		ratingClass[0].classList.remove("fa-star");
 		ratingClass[0].classList.add("fa-star-o");
 	}
@@ -142,11 +149,12 @@ function isMatchingComplete(){
 //display matching box
 function displayFinalScore(){
 	modal.style.display ="block";
-	console.log (score);
+	tMoves.innerHTML =score;
+	tStar.innerHTML=star;;
 }
 
 closeSpan.addEventListener('click', function(){
-	modal.style.display= "block";
+	modal.style.display= "none";
 });
 
 window.addEventListener('click', function(event){
