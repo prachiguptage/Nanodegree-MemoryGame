@@ -25,6 +25,7 @@ const timerSpan = document.querySelector('.timer');
 const tTimer = document.querySelector('.tTimer');
 const pauseSpan = document.querySelector('.pause');
 const play = document.querySelector('.play');
+const playAgain= document.querySelector('.play-again');
 let star;
 let score;
 let match;
@@ -264,4 +265,18 @@ pauseSpan.addEventListener('click',function(){
 play.addEventListener('click',function(){
 	play.style.display="none";
 	startTimer();
+});
+
+
+//play again
+playAgain.addEventListener('click',function(){
+	
+	console.log('in submit');
+	modal.style.display="none";
+ 	deckClass.innerHTML='';
+	clearInterval(interval);
+	second=0;
+	minutes=0;
+	timerSpan.innerHTML='0:00';
+	init();
 });

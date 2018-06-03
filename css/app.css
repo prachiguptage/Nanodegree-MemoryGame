@@ -222,7 +222,10 @@ h1 {
     animation-duration: 0.4s
 }
 
-.deck .card.open.not-match{
+.deck .card.open.not-match {
     background-color: #ff0000;
 }
 
+.play-again {
+        background-color: #796cad;
+}
