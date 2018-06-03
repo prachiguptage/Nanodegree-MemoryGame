@@ -15,7 +15,7 @@
 let openCard =[];
 const scoreClass = document.querySelector('.moves');
 const ratingClass = document.querySelectorAll('.fa-star');
-const refreshClass = document.querySelector(".restart");
+const refreshClass = document.querySelector(".refresh");
 const deckClass = document.querySelector(".deck");
 const modal = document.querySelector('.modal');
 const closeSpan = document.querySelector('.close');
@@ -23,6 +23,8 @@ const tMoves = document.querySelector('.tMoves');
 const tStar = document.querySelector('.tStar');
 const timerSpan = document.querySelector('.timer');
 const tTimer = document.querySelector('.tTimer');
+const pauseSpan = document.querySelector('.pause');
+const play = document.querySelector('.play');
 let star;
 let score;
 let match;
@@ -86,7 +88,7 @@ function enableClicking(){
 	const cardList = document.querySelectorAll('.card');
 
 	for(let card of cardList){
-		card.addEventListener('click',function cardClicked(){
+		card.addEventListener('click',function (){
 			if(!card.classList.contains('match') && !card.classList.contains('open') && !card.classList.contains('show') ){
 				scoreChange();
 				card.classList.add('open','show');
@@ -175,7 +177,7 @@ refreshClass.addEventListener('click',function(){
 	clearInterval(interval);
 	second=0;
 	minutes=0;
-	timerSpan.innerHTML='00:00';
+	timerSpan.innerHTML='0:00';
 	init();
 });
 
@@ -247,3 +249,17 @@ function setTimer(){
 
 	 timerSpan.innerHTML = time;
 }
+
+//pause functionality
+pauseSpan.addEventListener('click',function(){
+	clearInterval(interval);
+	console.log(play);
+	play.style.display ="block";
+	console.log('hi');
+});
+
+//play functionality
+play.addEventListener('click',function(){
+	play.style.display="none";
+	startTimer();
+});
