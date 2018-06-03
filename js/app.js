@@ -181,6 +181,7 @@ refreshClass.addEventListener('click',function(){
 	second=0;
 	minutes=0;
 	timerSpan.innerHTML='0:00';
+	openCard=[];
 	init();
 });
 
