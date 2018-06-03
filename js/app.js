@@ -258,13 +258,14 @@ pauseSpan.addEventListener('click',function(){
 	clearInterval(interval);
 	console.log(play);
 	play.style.display ="block";
-	console.log('hi');
 });
 
 //play functionality
 play.addEventListener('click',function(){
 	play.style.display="none";
-	startTimer();
+	if(!(minutes+':'+second === '0:0')){
+		startTimer();
+	}
 });
 
 

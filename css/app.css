@@ -28,7 +28,8 @@ body {
     flex-direction: column;
 }
 
-h1 {
+h1 
+h3 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
 }
@@ -194,7 +195,7 @@ h1 {
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     margin: auto;
-    padding-top: 300px; /* Location of the box */
+    padding-top: 200px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -202,7 +203,7 @@ h1 {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4);
-    font-size: 100px;
+    font-size: 10vw;
     text-align: center;
 
 }
@@ -228,4 +229,69 @@ h1 {
 
 .play-again {
         background-color: #796cad;
+        border-radius: 5px;
+        margin: 5px;
 }
+
+@media only screen and (max-width: 700px) {
+    .score-panel {
+        width: 90%;
+    }
+
+    .deck {
+        width: 95%;
+        padding: 16px;
+        min-height: 100vw;
+    }
+
+    .deck .card {
+        width: 20vw;
+        height: 20vw;
+    }
+    .deck .card.show {
+        font-size: 22px;
+    } 
+
+     .deck .card.match {
+        font-size: 22px;
+    } 
+
+    .modal-content {
+        width: 65%;
+    } 
+}
+
+@media only screen and (max-width: 350px) {
+
+    .deck {
+        width: 95%;
+        padding: 8px;
+        min-height: 90vw;
+    }
+
+    .deck .card.show {
+        font-size: 18px;
+    }
+
+    .deck .card.match {
+        font-size: 18px;
+    } 
+    .modal-content {
+        width: 88%;
+    }
+    .close {
+        font-size: 10vw;
+    }  
+}
+
+@media only screen and (max-width: 1000px and min-width: 550px) {
+    .modal-content {
+        width: 40%;
+    }
+}
+@media only screen and (max-width: 550px and min-width: 350px) {
+    .modal-content {
+        width: 55%;
+    }
+}
+
