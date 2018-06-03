@@ -7,3 +7,12 @@ The game is finished once all the cards are matched.
 The game display number of moves and timer.
 
 The player can pause the game or refresh game.
+
+## Technology used
+* HTML
+* css
+* javascript
+
+## Acknowledgments 
+* https://fontawesome.com/
+* https://fonts.google.com/specimen/Coda
