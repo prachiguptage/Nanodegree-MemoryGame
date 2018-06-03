@@ -2,37 +2,38 @@
  * Create a list that holds all of your cards
  */
 
- const cards = [ 'fa-diamond', 'fa-diamond',
- 				 'fa-paper-plane-o','fa-paper-plane-o',
- 				 'fa-anchor','fa-anchor',
- 				 'fa-bolt','fa-bolt',
- 				 'fa-cube','fa-cube',
- 				 'fa-leaf','fa-leaf',
- 				 'fa-bicycle','fa-bicycle',
- 				 'fa-bomb','fa-bomb'
+ let cards = [ 'fa-diamond', 
+ 				 'fa-paper-plane-o',
+ 				 'fa-anchor',
+ 				 'fa-bolt',
+ 				 'fa-cube',
+ 				 'fa-leaf',
+ 				 'fa-bicycle',
+ 				 'fa-bomb',
  			  	];
+cards = [...cards, ...cards];
 
 let openCard =[];
-const scoreClass = document.querySelector('.moves');
-const ratingClass = document.querySelectorAll('.fa-star');
-const refreshClass = document.querySelector(".refresh");
-const deckClass = document.querySelector(".deck");
-const modal = document.querySelector('.modal');
-const closeSpan = document.querySelector('.close');
-const tMoves = document.querySelector('.tMoves');
-const tStar = document.querySelector('.tStar');
-const timerSpan = document.querySelector('.timer');
-const tTimer = document.querySelector('.tTimer');
-const pauseSpan = document.querySelector('.pause');
-const play = document.querySelector('.play');
-const playAgain= document.querySelector('.play-again');
-let star;
-let score;
-let match;
-let second=0;
-let minutes=0;
-let hours=0;
-let interval;
+const scoreClass = document.querySelector('.moves'),
+	ratingClass = document.querySelectorAll('.fa-star'),
+	refreshClass = document.querySelector(".refresh"),
+	deckClass = document.querySelector(".deck"),
+	modal = document.querySelector('.modal'),
+	closeSpan = document.querySelector('.close'),
+	tMoves = document.querySelector('.tMoves'),
+	tStar = document.querySelector('.tStar'),
+	timerSpan = document.querySelector('.timer'),
+	tTimer = document.querySelector('.tTimer'),
+	pauseSpan = document.querySelector('.pause'),
+	play = document.querySelector('.play'),
+	playAgain= document.querySelector('.play-again');
+let star,
+	score,
+	match,
+	second=0,
+	minutes=0,
+	hours=0,
+	interval;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -41,7 +42,7 @@ let interval;
  */
  function generateCard(card){
  	
- 	return '<li class="card"><i class="fa '+ card+'"></i></li>';
+ 	return `<li class="card"><i class="fa ${card}"></i></li>`;
 
 
  }
@@ -119,16 +120,12 @@ function matchingCard(){
 		changeMatchClass();
 		match = match +1;
 		closeOpenCard();
-		if(isMatchingComplete()){
-			displayFinalScore();
-		}
+		isMatchingComplete() && (displayFinalScore());
 	}else{
 		openCard[0].classList.add('not-match');
 		openCard[1].classList.add('not-match');
 		window.setTimeout(function(){
-			if(openCard.length ==2){
-				closeOpenCard();
-			}
+			openCard.length ===2 && (closeOpenCard());
 		},1000);
 	}
 }
@@ -142,9 +139,7 @@ function changeMatchClass(){
 
 //score change
 function scoreChange(){
-	if(score === 0){
-		startTimer();
-	}
+	score === 0 &&(startTimer());
 	score=score+1;
 	scoreClass.innerText = score;
 	ratingUpdate();
@@ -211,9 +206,9 @@ function displayFinalScore(){
 	tMoves.innerHTML =score;
 	tStar.innerHTML=star;
 	if(hours>0)
-		tTimer.innerHTML= hours +':'+minutes+':'+second;
+		tTimer.innerHTML= `${hours}:${minutes}:${second}`;
 	else
-		tTimer.innerHTML= minutes+':'+second;
+		tTimer.innerHTML= `${minutes}:${second}`;
 }
 
 closeSpan.addEventListener('click', function(){
@@ -221,9 +216,7 @@ closeSpan.addEventListener('click', function(){
 });
 
 window.addEventListener('click', function(event){
-	if(event.target == modal){
-		modal.style.display="none";
-	}
+	event.target == modal && (modal.style.display="none");
 });
 
 //timer start
@@ -237,18 +230,18 @@ function setTimer(){
 	 second = second+1;
 	 if(second<10){
 	 	if (minutes>0)
-	 		time=minutes+':0'+second;
+	 		time=`${minutes}:0${second}`;
 	 	else
-	 		time='0:0'+second;
+	 		time=`0:0${second}`;
 	 }else if(second<60){
 	 	if (minutes>0)
-	 		time=minutes+':'+second;
+	 		time=`${minutes}:${second}`;
 	 	else
-	 		time='0:'+second;
+	 		time=`0:${second}`;
 	 }else {
 	 	minutes++;
 	 	second=0;
-	 	time = minutes+':00';
+	 	time = `${minutes}:00`;
 	 }
 
 	 timerSpan.innerHTML = time;
@@ -257,16 +250,13 @@ function setTimer(){
 //pause functionality
 pauseSpan.addEventListener('click',function(){
 	clearInterval(interval);
-	console.log(play);
 	play.style.display ="block";
 });
 
 //play functionality
 play.addEventListener('click',function(){
 	play.style.display="none";
-	if(!(minutes+':'+second === '0:0')){
-		startTimer();
-	}
+	(!(`${minutes}:${second}` === '0:0')) && (startTimer());
 });
 
 
