@@ -106,7 +106,7 @@ function enableClicking(){
 //close open card
 function closeOpenCard(){
 	for(let i=0;i<2;i++){
-		openCard[i].classList.remove('open', 'show');
+		openCard[i].classList.remove('open', 'show','not-match');
 	}
 	openCard.splice(0,2);
 }
@@ -122,6 +122,8 @@ function matchingCard(){
 			displayFinalScore();
 		}
 	}else{
+		openCard[0].classList.add('not-match');
+		openCard[1].classList.add('not-match');
 		window.setTimeout(function(){
 			if(openCard.length ==2){
 				closeOpenCard();

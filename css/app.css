@@ -222,3 +222,7 @@ h1 {
     animation-duration: 0.4s
 }
 
+.deck .card.open.not-match{
+    background-color: #ff0000;
+}
+
